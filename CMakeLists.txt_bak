@@ -138,26 +138,26 @@ target_link_libraries(10_Userdata LuaLib)
 
 # 11、管理资源
 # https://github.com/libexpat/libexpat/tree/R_2_5_0
-# find_package(EXPAT 2.4.8 MODULE REQUIRED)
-# add_executable(
-#         11_Manage_Resource
-#         11_C++Lua/main.cpp
-#         11_C++Lua/file/file.cpp
-#         11_C++Lua/xml/xml_parser.cpp
-#         utils/lua_ext.cpp
-#         config/env_config.cpp
-# )
-# target_link_libraries(11_Manage_Resource PUBLIC LuaLib EXPAT::EXPAT)
-# target_include_directories(11_Manage_Resource PRIVATE ${EXPAT_INCLUDE_DIRS})
-# target_link_libraries(11_Manage_Resource PUBLIC ${EXPAT_LIBRARIES})
+find_package(EXPAT 2.4.8 MODULE REQUIRED)
+add_executable(
+        11_Manage_Resource
+        11_C++Lua/main.cpp
+        11_C++Lua/file/file.cpp
+        11_C++Lua/xml/xml_parser.cpp
+        utils/lua_ext.cpp
+        config/env_config.cpp
+)
+target_link_libraries(11_Manage_Resource PUBLIC LuaLib EXPAT::EXPAT)
+target_include_directories(11_Manage_Resource PRIVATE ${EXPAT_INCLUDE_DIRS})
+target_link_libraries(11_Manage_Resource PUBLIC ${EXPAT_LIBRARIES})
 
 # 12、线程和状态
-# add_executable(
-#         12_Thread_And_State
-#         12_C++Lua/main.cpp
-#         12_C++Lua/thread/thread_demo.cpp
-#         12_C++Lua/lproc/lproc.cpp
-#         utils/lua_ext.cpp
-#         config/env_config.cpp
-# )
-# target_link_libraries(12_Thread_And_State LuaLib)
+add_executable(
+        12_Thread_And_State
+        12_C++Lua/main.cpp
+        12_C++Lua/thread/thread_demo.cpp
+        12_C++Lua/lproc/lproc.cpp
+        utils/lua_ext.cpp
+        config/env_config.cpp
+)
+target_link_libraries(12_Thread_And_State LuaLib)
