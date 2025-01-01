@@ -3,7 +3,7 @@
 //
 
 #include "lua.hpp"
-
+#include <iostream>
 /**
  * 验证 Lua 集成是否成功
  */
@@ -25,5 +25,6 @@ int main() {
     printf("=============== 验证 Lua 集成 ===============\n");
     verification();
     printf("============================================\n");
+    std::cin.get();
     return 0;
 }
