@@ -5,7 +5,8 @@ set(LUA_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lua-5.4.4)
 # Mac: LUA_USE_MACOSX
 # Linux: LUA_USE_LINUX
 # Windows: LUA_USE_WIN
-add_definitions(-DLUA_USE_MACOSX)
+# add_definitions(-DLUA_USE_MACOSX)
+add_definitions(-DLUA_USE_WIN)
 # 在 lua 中，定义了 LUA_USE_MACOSX 则会定义 LUA_USE_POSIX 和 LUA_USE_DLOPEN
 # 所以两者是一样的
 #add_definitions(-DLUA_USE_POSIX -DLUA_USE_DLOPEN)
