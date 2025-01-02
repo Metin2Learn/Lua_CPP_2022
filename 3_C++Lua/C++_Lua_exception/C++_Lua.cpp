@@ -2,7 +2,7 @@
 // Created by 江澎涌 on 2022/4/28.
 //
 
-#include "C++处理Lua异常.h"
+#include "C++_Lua.h"
 
 using namespace LuaExt;
 
@@ -15,7 +15,7 @@ void cppHandleLuaError() {
     // 加载函数库，否则加载的 Lua 无法使用内置库
     luaL_openlibs(L);
 
-    auto luaFilePath = PROJECT_PATH + "/3、C++与Lua交互错误处理/C++调用Lua异常处理/C运行的Lua文件.lua";
+    auto luaFilePath = PROJECT_PATH + "/3_C++Lua/C++_Lua_exception/C_Lua.lua";
 
     // 开启这段代码可以验证错误处理函数的栈是新的
     lua_pushinteger(L, 100);

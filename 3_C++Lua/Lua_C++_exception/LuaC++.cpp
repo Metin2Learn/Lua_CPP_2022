@@ -2,7 +2,7 @@
 // Created by 江澎涌 on 2022/5/1.
 //
 
-#include "Lua处理C++异常.h"
+#include "LuaC++.h"
 
 int cppError(lua_State *L) {
     // 第一种方式，lua_error 会将栈顶的元素作为 Lua 的错误信息
@@ -23,7 +23,7 @@ void luaHandleCppError() {
     // 将压入的函数 cppError 设置为 cppError 变量
     lua_setglobal(L, "cppError");
 
-    std::string fname = PROJECT_PATH + "/3、C++与Lua交互错误处理/Lua调用C++异常处理/Lua处理C++异常.lua";
+    std::string fname = PROJECT_PATH + "/3_C++Lua/Lua_C++_exception/LuaC++.lua";
     if (luaL_loadfile(L, fname.c_str()) || LuaExt::safeCallLua(L, 0, 0)) {
         printf("运行 Lua 文件失败.\n%s\n", lua_tostring(L, -1));
     }

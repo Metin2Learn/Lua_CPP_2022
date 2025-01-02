@@ -22,6 +22,8 @@ void verification() {
 }
 
 int main() {
+    //setlocale(LC_ALL, "zh_CN.UTF-8");
+    //system("CHCP 65001");
     printf("=============== 验证 Lua 集成 ===============\n");
     verification();
     printf("============================================\n");

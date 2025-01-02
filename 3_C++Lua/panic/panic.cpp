@@ -2,7 +2,7 @@
 // Created by 江澎涌 on 2022/4/28.
 //
 
-#include "紧急函数.h"
+#include "panic.h"
 
 int panicHandle(lua_State *L) {
     const char *error = lua_tostring(L, -1);
@@ -17,7 +17,7 @@ int panicHandle(lua_State *L) {
 void panicMain() {
     lua_State *L = luaL_newstate();
 
-    auto luaFilePath = PROJECT_PATH + "/3、C++与Lua交互错误处理/紧急函数/Lua异常.lua";
+    auto luaFilePath = PROJECT_PATH + "/3_C++Lua/panic/Lua.lua";
 
     // 加载 Lua 脚本
     auto loadLuaResult = luaL_loadfile(L, luaFilePath.c_str());
