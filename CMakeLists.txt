@@ -48,6 +48,30 @@ target_link_libraries(3_CPP_Lua_handle_error LuaLib)
 add_executable(
         4_CPP_Lua_alloc_memory
         4_C++Lua/main.cpp
+        4_C++Lua/allocation.cpp
+        config/env_config.cpp
+        utils/lua_ext.cpp
+)
+target_link_libraries(4_CPP_Lua_alloc_memory LuaLib)
+
+
+# 6、 Lua 回调 C++
+add_executable(
+        6_Lua_Call_CPP
+        6_C++Lua/main.cpp
+        6_C++Lua/CallC++/sin.cpp
+        6_C++Lua/CallC++/dir.cpp
+        6_C++Lua/coroutine/CoroutineDemo.cpp
+        6_C++Lua/Lua调用C++的lib/
+        config/env_config.cpp
+        utils/lua_ext.cpp
+)
+target_link_libraries(6_Lua_Call_CPP LuaLib)
+
+# 4、C++与Lua交互内存管理
+add_executable(
+        4_CPP_Lua_alloc_memory
+        4_C++Lua/main.cpp
         4_C++Lua/自定义内存分配器.cpp
         config/env_config.cpp
         utils/lua_ext.cpp

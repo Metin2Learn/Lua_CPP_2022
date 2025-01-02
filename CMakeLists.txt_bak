@@ -71,8 +71,8 @@ target_link_libraries(5_CPP_Call_Lua LuaLib)
 add_executable(
         6_Lua_Call_CPP
         6_C++Lua/main.cpp
-        6_C++Lua/调用C++函数/简易的sin函数.cpp
-        6_C++Lua/调用C++函数/读取目录函数.cpp
+        6_C++Lua/CallC++/简易的sin函数.cpp
+        6_C++Lua/CallC++/读取目录函数.cpp
         6_C++Lua/协程/CoroutineDemo.cpp
         6_C++Lua/Lua调用C++的lib/
         config/env_config.cpp

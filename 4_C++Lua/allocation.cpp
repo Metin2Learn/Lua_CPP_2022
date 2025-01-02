@@ -2,7 +2,7 @@
 // Created by 江澎涌 on 2023/9/13.
 //
 
-#include "自定义内存分配器.h"
+#include "allocation.h"
 
 static void *alloc(void *ud, void *ptr, size_t osize, size_t nsize) {
     const char *udContent = *(const char **) ud;

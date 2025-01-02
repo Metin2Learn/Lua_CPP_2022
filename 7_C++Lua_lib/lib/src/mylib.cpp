@@ -9,7 +9,7 @@
 
 int l_dir(lua_State *L) {
     // 检测入参是否为字符串
-    // 如果不是，则会抛出异常到 Lua 中，can't run config. file: .../6、Lua回调C++/调用C++函数/读取目录函数.lua:11: bad argument #1 to 'dir' (string expected, got table)
+    // 如果不是，则会抛出异常到 Lua 中，can't run config. file: .../6、Lua回调C++/CallC++/读取目录函数.lua:11: bad argument #1 to 'dir' (string expected, got table)
     const char *path = luaL_checkstring(L, 1);
 
     // 打开相应目录

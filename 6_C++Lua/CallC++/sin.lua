@@ -9,5 +9,5 @@ print("sin: ", sin);
 s = sin(10);
 print("s: ", s);
 
--- can't run config. file: ...ktop/code/Lua/Lua_CPP_2022/6、Lua回调C++/调用C++函数/lua_call_c.lua:11: bad argument #1 to 'sin' (number expected, got string)
+-- can't run config. file: ...ktop/code/Lua/Lua_CPP_2022/6、Lua回调C++/CallC++/lua_call_c.lua:11: bad argument #1 to 'sin' (number expected, got string)
 --s = sin('a');

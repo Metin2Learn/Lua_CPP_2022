@@ -5,11 +5,13 @@
 #include <string>
 #include "lua.hpp"
 #include "../config/env_config.h"
-#include "调用C++函数/简易的sin函数.h"
-#include "调用C++函数/读取目录函数.h"
-#include "协程/CoroutineDemo.h"
+#include "CallC++/sin.h"
+#include "CallC++/dir.h"
+#include "coroutine/CoroutineDemo.h"
+#include <iostream>
 
 int main() {
+    system("CHCP 65001");
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
 
@@ -19,7 +21,7 @@ int main() {
     // 将压入的函数 l_sin 设置为 sin 变量
     lua_setglobal(L, "sin");
 
-    std::string fname1 = PROJECT_PATH + "/6、Lua回调C++/调用C++函数/简易的sin函数.lua";
+    std::string fname1 = PROJECT_PATH + "/6_C++Lua/CallC++/sin.lua";
     if (luaL_loadfile(L, fname1.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run config. file: %s\n", lua_tostring(L, -1));
     }
@@ -31,7 +33,7 @@ int main() {
     // 将压入的函数 l_dir 设置为 dir 变量
     lua_setglobal(L, "dir");
 
-    std::string fname2 = PROJECT_PATH + "/6、Lua回调C++/调用C++函数/读取目录函数.lua";
+    std::string fname2 = PROJECT_PATH + "/6_C++Lua/CallC++/dir.lua";
     if (luaL_loadfile(L, fname2.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run config. file: %s\n", lua_tostring(L, -1));
     }
@@ -42,5 +44,6 @@ int main() {
 
     lua_close(L);
 
+    std::cin.get();
     return 1;
 }

@@ -5,7 +5,7 @@
 #include "CoroutineDemo.h"
 
 void coroutineDemo() {
-    std::string fileName = PROJECT_PATH + "/6、Lua回调C++/协程/coroutine.lua";
+    std::string fileName = PROJECT_PATH + "/6_C++Lua/coroutine/coroutine.lua";
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
 
