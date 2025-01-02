@@ -68,6 +68,15 @@ add_executable(
 )
 target_link_libraries(6_Lua_Call_CPP LuaLib)
 
+# 7、Lua调用C++的lib
+add_executable(
+        7_Lua_Call_CPP_Lib
+        7_C++Lua_lib/main.cpp
+        config/env_config.cpp
+        utils/lua_ext.cpp
+)
+target_link_libraries(7_Lua_Call_CPP_Lib LuaLib)
+
 # 4、C++与Lua交互内存管理
 add_executable(
         4_CPP_Lua_alloc_memory
