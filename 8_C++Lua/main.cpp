@@ -3,11 +3,11 @@
 //
 
 #include <cstdio>
-#include "数组便捷存取/LuaArray.h"
-#include "字符串便捷操作/LuaString.h"
-
+#include "arr/LuaArray.h"
+#include "str/LuaString.h"
+#include <iostream>
 int main(){
-
+    system("CHCP 65001");
     printf("======================== 数组便捷存取 ========================\n");
     luaArrayDemo();
 
@@ -32,5 +32,6 @@ int main(){
     printf("------------------------ buffer ------------------------\n");
     bufferConcatDemo();
 
+    std::cin.get();
     return 1;
 }

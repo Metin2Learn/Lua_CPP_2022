@@ -16,7 +16,7 @@
 
 // 检查第一个参数是否是一个有效的数组
 // 如果元表类型不对，则会抛出
-// .../Lua/Lua_CPP_2022/10、userdata/用户数据/newarray_数组访问.lua:15: bad argument #1 to 'get' (df expected, got Jiang.array)
+// .../Lua/Lua_CPP_2022/10_C++Lua_userdata/用户数据/newarray_数组访问.lua:15: bad argument #1 to 'get' (df expected, got Jiang.array)
 #define checkarray(L) (BitArray *)luaL_checkudata(L, 1, METE.c_str())
 
 static const std::string METE = "Jiang.array";
@@ -122,7 +122,7 @@ void arraySimpleDemo() {
     luaopen_array(L);
     lua_setglobal(L, "array");
 
-    std::string fileName = PROJECT_PATH + "/10、userdata/full_userdata/array/1普通版本/array.lua";
+    std::string fileName = PROJECT_PATH + "/10_C++Lua_userdata/full_userdata/array/a/array.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf( "can't run config. file: %s\n", lua_tostring(L, -1));
     }

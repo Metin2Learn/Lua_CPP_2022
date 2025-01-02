@@ -36,9 +36,9 @@ target_link_libraries(2_CPP_Lua_communication_stack LuaLib)
 add_executable(
         3_CPP_Lua_handle_error
         3_C++Lua/main.cpp
-        3_C++Lua/C++调用Lua异常处理/C++处理Lua异常.cpp
-        3_C++Lua/Lua调用C++异常处理/Lua处理C++异常.cpp
-        3_C++Lua/紧急函数/紧急函数.cpp
+        3_C++Lua/C++_Lua_exception/C++_Lua.cpp
+        3_C++Lua/Lua_C++_exception/LuaC++.cpp
+        3_C++Lua/panic/panic.cpp
         config/env_config.cpp
         utils/lua_ext.cpp
 )
@@ -77,62 +77,17 @@ add_executable(
 )
 target_link_libraries(7_Lua_Call_CPP_Lib LuaLib)
 
-# 4、C++与Lua交互内存管理
-add_executable(
-        4_CPP_Lua_alloc_memory
-        4_C++Lua/main.cpp
-        4_C++Lua/自定义内存分配器.cpp
-        config/env_config.cpp
-        utils/lua_ext.cpp
-)
-target_link_libraries(4_CPP_Lua_alloc_memory LuaLib)
-
-# 5、 C++ 调用 Lua 函数
-add_executable(
-        5_CPP_Call_Lua
-        5_C++Lua/main.cpp
-        5_C++Lua/Lua作为配置文件/根据环境变量获取值/config_use_env.cpp
-        5_C++Lua/Lua作为配置文件/配置中使用表/config_use_table.cpp
-        5_C++Lua/调用Lua函数/调用Lua函数.cpp
-        5_C++Lua/通用调用lua函数/call_va.cpp
-        config/env_config.cpp
-        utils/lua_ext.cpp
-)
-target_link_libraries(5_CPP_Call_Lua LuaLib)
-
-# 6、 Lua 回调 C++
-add_executable(
-        6_Lua_Call_CPP
-        6_C++Lua/main.cpp
-        6_C++Lua/调用C++函数/简易的sin函数.cpp
-        6_C++Lua/调用C++函数/读取目录函数.cpp
-        6_C++Lua/协程/CoroutineDemo.cpp
-        6_C++Lua/Lua调用C++的lib/
-        config/env_config.cpp
-        utils/lua_ext.cpp
-)
-target_link_libraries(6_Lua_Call_CPP LuaLib)
-
-# 7、Lua调用C++的lib
-add_executable(
-        7_Lua_Call_CPP_Lib
-        7_C++Lua_lib/main.cpp
-        config/env_config.cpp
-        utils/lua_ext.cpp
-)
-target_link_libraries(7_Lua_Call_CPP_Lib LuaLib)
-
 # 8、编写 C 函数技巧
 add_executable(
         8_C_Function_Skill
         8_C++Lua/main.cpp
-        8_C++Lua/数组便捷存取/LuaArray.cpp
-        8_C++Lua/字符串便捷操作/LuaString.cpp
-        9_C++Lua/注册表/注册表.cpp
-        9_C++Lua/共享上值/共享上值.cpp
-        9_C++Lua/上值/上值.cpp
-        9_C++Lua/tuple/tuplelib.cpp
-        9_C++Lua/共享上值/共享上值.cpp
+        8_C++Lua/arr/LuaArray.cpp
+        8_C++Lua/str/LuaString.cpp
+#         9_C++Lua/注册表/注册表.cpp
+#         9_C++Lua/共享上值/共享上值.cpp
+#         9_C++Lua/上值/上值.cpp
+#         9_C++Lua/tuple/tuplelib.cpp
+#         9_C++Lua/共享上值/共享上值.cpp
         config/env_config.cpp
         utils/lua_ext.cpp
 )
@@ -142,55 +97,28 @@ target_link_libraries(8_C_Function_Skill LuaLib)
 add_executable(
         9_C_Save_State
         9_C++Lua/main.cpp
-        9_C++Lua/注册表/注册表.cpp
-        9_C++Lua/共享上值/共享上值.cpp
-        9_C++Lua/上值/上值.cpp
+        9_C++Lua/reg/reg.cpp
+        9_C++Lua/shareup/shareup.cpp
+        9_C++Lua/up/up.cpp
         9_C++Lua/tuple/tuplelib.cpp
-        9_C++Lua/共享上值/共享上值.cpp
         config/env_config.cpp
         utils/lua_ext.cpp
 )
 target_link_libraries(9_C_Save_State LuaLib)
 
-# 10、userdata
+# 10_C++Lua_userdata
 add_executable(
         10_Userdata
         10_C++Lua_userdata/main.cpp
-        10_C++Lua_userdata/full_userdata/user/1普通版本/user.cpp
-        10_C++Lua_userdata/full_userdata/user/2增加元表检查/user.cpp
-        10_C++Lua_userdata/full_userdata/user/3面向对象/user.cpp
-        10_C++Lua_userdata/full_userdata/array/1普通版本/array.cpp
-        10_C++Lua_userdata/full_userdata/array/2增加元表/array.cpp
-        10_C++Lua_userdata/full_userdata/array/3面向对象/array.cpp
-        10_C++Lua_userdata/full_userdata/array/4数组访问/array.cpp
+        10_C++Lua_userdata/full_userdata/user/a/user.cpp
+        10_C++Lua_userdata/full_userdata/user/b/user.cpp
+        10_C++Lua_userdata/full_userdata/user/c/user.cpp
+        10_C++Lua_userdata/full_userdata/array/a/array.cpp
+        10_C++Lua_userdata/full_userdata/array/b/array.cpp
+        10_C++Lua_userdata/full_userdata/array/c/array.cpp
+        10_C++Lua_userdata/full_userdata/array/d/array.cpp
         10_C++Lua_userdata/light_userdata/user.cpp
         utils/lua_ext.cpp
         config/env_config.cpp
 )
 target_link_libraries(10_Userdata LuaLib)
-
-# 11、管理资源
-# https://github.com/libexpat/libexpat/tree/R_2_5_0
-# find_package(EXPAT 2.4.8 MODULE REQUIRED)
-# add_executable(
-#         11_Manage_Resource
-#         11_C++Lua/main.cpp
-#         11_C++Lua/file/file.cpp
-#         11_C++Lua/xml/xml_parser.cpp
-#         utils/lua_ext.cpp
-#         config/env_config.cpp
-# )
-# target_link_libraries(11_Manage_Resource PUBLIC LuaLib EXPAT::EXPAT)
-# target_include_directories(11_Manage_Resource PRIVATE ${EXPAT_INCLUDE_DIRS})
-# target_link_libraries(11_Manage_Resource PUBLIC ${EXPAT_LIBRARIES})
-
-# 12、线程和状态
-# add_executable(
-#         12_Thread_And_State
-#         12_C++Lua/main.cpp
-#         12_C++Lua/thread/thread_demo.cpp
-#         12_C++Lua/lproc/lproc.cpp
-#         utils/lua_ext.cpp
-#         config/env_config.cpp
-# )
-# target_link_libraries(12_Thread_And_State LuaLib)

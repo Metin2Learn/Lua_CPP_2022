@@ -16,10 +16,10 @@
 
 // 检查第一个参数是否是一个有效的数组
 // 如果元表类型不对，则会抛出
-// .../Lua/Lua_CPP_2022/10、userdata/用户数据/newarray_面向对象.lua:15: bad argument #1 to 'get' (df expected, got Jiang.array)
+// .../Lua/Lua_CPP_2022/10_C++Lua_userdata/用户数据/newarray_数组访问.lua:15: bad argument #1 to 'get' (df expected, got Jiang.array)
 #define checkarray(L) (BitArray *)luaL_checkudata(L, 1, META.c_str())
 
-static const std::string META = "Jiang.array_obj";
+static const std::string META = "Jiang.array";
 
 typedef struct BitArray {
     int size;
@@ -32,21 +32,17 @@ typedef struct BitArray {
  * @param L
  * @return
  */
-int newarrayForObj(lua_State *L) {
-    int i;
-    size_t nbytes;
-    BitArray *a;
-
-    // lua 传递过来的参数，
+static int newarrayForMetatable(lua_State *L) {
+    // Lua 传递过来的参数
     int n = (int) luaL_checkinteger(L, 1);
     luaL_argcheck(L, n >= 1, 1, "invalid size");
 
     // 计算所需要的存储长度
-    nbytes = sizeof(BitArray) + I_WORD(n - 1) * sizeof(unsigned int);
-    // 生成一个 user data 并压入栈中
-    a = (BitArray *) lua_newuserdata(L, nbytes);
+    size_t nbytes = sizeof(BitArray) + I_WORD(n - 1) * sizeof(unsigned int);
+    // 生成一个 User Data 并压入栈中
+    auto *a = (BitArray *) lua_newuserdata(L, nbytes);
     a->size = n;
-    for (i = 0; i < I_WORD(n - 1); ++i) {
+    for (int i = 0; i < I_WORD(n - 1); ++i) {
         a->values[i] = 0;
     }
 
@@ -57,7 +53,7 @@ int newarrayForObj(lua_State *L) {
     return 1;
 }
 
-static unsigned int *getparamsForObj(lua_State *L, unsigned int *mask) {
+static unsigned int *getparams(lua_State *L, unsigned int *mask) {
     auto *a = checkarray(L);
     int index = (int) luaL_checkinteger(L, 2) - 1;
 
@@ -66,9 +62,27 @@ static unsigned int *getparamsForObj(lua_State *L, unsigned int *mask) {
     return &a->values[I_WORD(index)];
 }
 
-static int setarrayForObj(lua_State *L) {
+//static int setarrayForMetatable(lua_State *L) {
+//    auto *a = (BitArray *) lua_touserdata(L, 1);
+//    int index = (int) luaL_checkinteger(L, 2) - 1;
+//    luaL_argcheck(L, a != nullptr, 1, "'array' expected");
+//    luaL_argcheck(L, 0 <= index && index < a->size, 2, "index out of range");
+//
+//    luaL_checkany(L, 3);
+//
+//    if (lua_toboolean(L, 3)) {
+//        // 置位
+//        a->values[I_WORD(index)] |= I_BIT(index);
+//    } else {
+//        // 复位
+//        a->values[I_WORD(index)] &= ~I_BIT(index);
+//    }
+//
+//    return 0;
+//}
+static int setarrayForMetatable(lua_State *L) {
     unsigned int mask;
-    unsigned int *entry = getparamsForObj(L, &mask);
+    unsigned int *entry = getparams(L, &mask);
     luaL_checkany(L, 3);
     if (lua_toboolean(L, 3)) {
         // 置位
@@ -80,14 +94,24 @@ static int setarrayForObj(lua_State *L) {
     return 0;
 }
 
-static int getarrayForObj(lua_State *L) {
+//static int getarrayForMetatable(lua_State *L) {
+//    auto *a = (BitArray *) lua_touserdata(L, 1);
+//    int index = (int) luaL_checkinteger(L, 2) - 1;
+//
+//    luaL_argcheck(L, a != nullptr, 1, "'array' expected");
+//    luaL_argcheck(L, 0 <= index && index < a->size, 2, "index out of range");
+//
+//    lua_pushboolean(L, a->values[I_WORD(index)] & I_BIT(index));
+//    return 1;
+//}
+static int getarrayForMetatable(lua_State *L) {
     unsigned int mask;
-    unsigned int *entry = getparamsForObj(L, &mask);
+    unsigned int *entry = getparams(L, &mask);
     lua_pushboolean(L, *entry & mask);
     return 1;
 }
 
-static int getsizeForObj(lua_State *L) {
+static int getsizeForMetatable(lua_State *L) {
 //    auto *a = (BitArray *) lua_touserdata(L, 1);
 //    luaL_argcheck(L, a != nullptr, 1, "'array' expected");
     auto *a = checkarray(L);
@@ -95,46 +119,27 @@ static int getsizeForObj(lua_State *L) {
     return 1;
 }
 
-int array2string(lua_State *L) {
-    BitArray *a = checkarray(L);
-    lua_pushfstring(L, "array(%d)", a->size);
-    return 1;
-}
-
-static const struct luaL_Reg arraylib_f_obj[] = {
-        {"new",   newarrayForObj},
+static const struct luaL_Reg arraylib[] = {
+        {"new",   newarrayForMetatable},
+        {"set",   setarrayForMetatable},
+        {"get",   getarrayForMetatable},
+        {"size",  getsizeForMetatable},
         {nullptr, nullptr}
 };
-static const struct luaL_Reg arraylib_m_obj[] = {
-        {"set",        setarrayForObj},
-        {"get",        getarrayForObj},
-        {"size",       getsizeForObj},
-        {"__tostring", array2string},
-        {nullptr,      nullptr}
-};
 
-int luaopen_array_for_obj(lua_State *L) {
-    // 创建元表
+int luaopen_arrayForMetatable(lua_State *L) {
     luaL_newmetatable(L, META.c_str());
-    // 复制元表
-    lua_pushvalue(L, -1);
-    // mt.__index = mt
-    lua_setfield(L, -2, "__index");
-    // 注册元方法
-    luaL_setfuncs(L, arraylib_m_obj, 0);
-    // 创建库
-    luaL_newlib(L, arraylib_f_obj);
+    luaL_newlib(L, arraylib);
     return 1;
 }
 
-void arrayObjectDemo() {
+void arrayUseMetatableDemo() {
     lua_State *L = luaL_newstate();
-
     luaL_openlibs(L);
-    luaopen_array_for_obj(L);
+    luaopen_arrayForMetatable(L);
     lua_setglobal(L, "array");
 
-    std::string fileName = PROJECT_PATH + "/10、userdata/full_userdata/array/3面向对象/array.lua";
+    std::string fileName = PROJECT_PATH + "/10_C++Lua_userdata/full_userdata/array/b/array.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run config. file: %s\n", lua_tostring(L, -1));
     }

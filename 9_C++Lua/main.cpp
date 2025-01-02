@@ -3,12 +3,13 @@
 //
 
 #include <cstdio>
-#include "注册表/注册表.h"
-#include "上值/上值.h"
+#include "reg/reg.h"
+#include "up/up.h"
 #include "tuple/tuplelib.h"
-#include "共享上值/共享上值.h"
-
+#include "shareup/shareup.h"
+#include <iostream>
 int main(){
+    system("CHCP 65001");
     printf("======================== 注册表 ========================\n");
     printf("------------------------ 模块自定义 key 值 ------------------------\n");
     customKeyRegistryDemo();
@@ -28,6 +29,6 @@ int main(){
     printf("\n");
     printf("======================== share up value ========================\n");
     shareUpValueDemo();
-
+    std::cin.get();
     return 1;
 }

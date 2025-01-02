@@ -3,17 +3,18 @@
 //
 
 #include <cstdio>
-#include "full_userdata/user/1普通版本/user.h"
-#include "full_userdata/user/2增加元表检查/user.h"
-#include "full_userdata/user/3面向对象/user.h"
-#include "full_userdata/array/1普通版本/array.h"
-#include "full_userdata/array/2增加元表/array.h"
-#include "full_userdata/array/3面向对象/array.h"
-#include "full_userdata/array/4数组访问/array.h"
+#include "full_userdata/user/a/user.h"
+#include "full_userdata/user/b/user.h"
+#include "full_userdata/user/c/user.h"
+#include "full_userdata/array/a/array.h"
+#include "full_userdata/array/b/array.h"
+#include "full_userdata/array/c/array.h"
+#include "full_userdata/array/d/array.h"
 #include "light_userdata/user.h"
-
+#include <iostream>
 
 int main() {
+    system("CHCP 65001");
     printf("\n");
     printf("==============================================\n");
     printf("================ user userdata================\n");
@@ -56,6 +57,6 @@ int main() {
     printf("===============================================\n");
 
     lightUserdataDemo();
-
+    std::cin.get();
     return 1;
 }

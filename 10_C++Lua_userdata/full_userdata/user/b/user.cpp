@@ -108,7 +108,7 @@ void userMetatableDemo() {
     luaopen_userForMetatable(L);
     lua_setglobal(L, "user");
 
-    std::string fileName = PROJECT_PATH + "/10、userdata/full_userdata/user/2增加元表检查/user.lua";
+    std::string fileName = PROJECT_PATH + "/10_C++Lua_userdata/full_userdata/user/b/user.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run config. file: %s\n", lua_tostring(L, -1));
     }

@@ -2,7 +2,7 @@
 // Created by 江澎涌 on 2022/5/8.
 //
 
-#include "上值.h"
+#include "up.h"
 
 static int counter(lua_State *L) {
     // 通过 lua_upvalueindex 获取第一个上值的伪索引，并通过 lua_tointeger 获取到对应的值
@@ -40,7 +40,7 @@ void upValueDemo() {
     // Counter = lib
     lua_setglobal(L, "Counter");
 
-    std::string fileName = PROJECT_PATH + "/9、C函数中如何保存Lua的数据/上值/上值.lua";
+    std::string fileName = PROJECT_PATH + "/9_C++Lua/up/up.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run config. file: %s", lua_tostring(L, -1));
     }

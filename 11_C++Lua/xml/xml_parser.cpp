@@ -194,7 +194,7 @@ void xmlParserDemo() {
     luaL_openlibs(L);
     luaopen_lxp(L);
 
-    std::string fileName = PROJECT_PATH + "/11、管理资源/xml/xml_parser.lua";
+    std::string fileName = PROJECT_PATH + "/11_C++Lua/xml/xml_parser.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run file. file: %s", lua_tostring(L, -1));
     }

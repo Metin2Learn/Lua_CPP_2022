@@ -2,7 +2,7 @@
 // Created by 江澎涌 on 2022/5/8.
 //
 
-#include "注册表.h"
+#include "reg.h"
 
 // 自定义 key 值
 void customKeyRegistryDemo() {
